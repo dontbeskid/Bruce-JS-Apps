@@ -1,6 +1,3 @@
-// term-sim.js - fake terminal simulator for bruce firmware (Debian theme)
-// es5 style for the bruce js interpreter (var, function, no arrow funcs)
-
 const display = require("display");
 const keyboard = require("keyboard");
 const device = require("device");
@@ -8,24 +5,22 @@ const audio = require("audio");
 
 var W = display.width();
 var H = display.height();
-var CH_W = 6; // approx char width at textSize(1)
-var CH_H = 8; // approx char height at textSize(1)
+var CH_W = 6;
+var CH_H = 8; 
 var MAX_CHARS = Math.floor((W - 8) / CH_W);
 var MAX_LINES = Math.floor((H - 6) / CH_H);
 
-// --- Цветовая палитра ---
-var colBg = display.color(18, 20, 22);       // Тёмно-серый / графитовый фон
-var colMain = display.color(255, 140, 0);    // Основной оранжевый
-var colBright = display.color(255, 190, 100); // Яркий оранжевый акцент
-var colDim = display.color(140, 75, 20);     // Приглушённый оранжевый
-var colErr = display.color(230, 80, 80);     // Красный для ошибок
-var colInfo = display.color(255, 165, 0);    // Яркий инфо-оранжевый
+var colBg = display.color(18, 20, 22); 
+var colMain = display.color(255, 140, 0); 
+var colBright = display.color(255, 190, 100);
+var colDim = display.color(140, 75, 20);
+var colErr = display.color(230, 80, 80);
+var colInfo = display.color(255, 165, 0); 
 
 var startTime = now();
 var user = "guest";
 var host = "debian";
 
-// Debian ASCII / Downsampled logo
 var LOGO = [
   "    ##.  .#.      ",
   "    .##  .#. .#.  ",
@@ -41,7 +36,6 @@ var LOGO = [
   "    .   ##   .    "
 ];
 
-// toy filesystem
 var fs = {
   name: "/",
   type: "dir",
@@ -94,7 +88,7 @@ var fs = {
   }
 };
 
-var cwd = ["home", "guest"]; // current path from root
+var cwd = ["home", "guest"];
 
 function getNode(pathArr) {
   var node = fs;
@@ -125,7 +119,7 @@ function resolvePath(raw) {
   return base;
 }
 
-var buffer = []; // {text, color}
+var buffer = [];
 var history = [];
 
 function pushLine(text, color) {
@@ -410,7 +404,6 @@ function mainLoop() {
     drawTerminal(true);
 
     if (keyboard.getSelPress()) {
-      // Пустой начальный текст, чтобы подсказка не подставлялась в ввод
       var input = keyboard.keyboard("", 60, "");
       if (input === null || input === undefined) input = "";
 
