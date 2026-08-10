@@ -1,4 +1,4 @@
-# Bruce JS Apps
-  List :
-    1. casino (ludo)
-    2. fake debian
+## Bruce JS Apps / by me
+
+* Casino (Ludo)
+* Fake Debian
